@@ -61,7 +61,14 @@ namespace AutoWarhead.CustomWarheads
             }
 
             yield return Timing.WaitForSeconds(MainThing.Instance.Config.AutoWarheadWarningDelay);
-            StartWarhead(true, MainThing.Instance.Config.AutoWarheadScenarioId);
+            if (AlphaWarheadController.InProgress) 
+            { 
+                AlphaWarheadController.Singleton.IsLocked = true;
+            }
+            else
+            {
+                StartWarhead(true, MainThing.Instance.Config.AutoWarheadScenarioId);
+            }
         }
 
         private void OnWarheadBoom()
